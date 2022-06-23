@@ -7,22 +7,22 @@ function ListAppointment(props) {
   const [data, setData] = useState([])
 
   const loadData = () => {
+
+    let localData = JSON.parse(localStorage.getItem("apt"));
     
-    let localData = JSON.parse(localStorage.getItem(("apt")));
-    if(localData !== null){
-    setData(localData);
+      setData(localData);
+    
   }
-  }
- const handledelete =(id)=>{
-    let localData =JSON.parse(localStorage.getItem("apt"));
-    let dData = localData.filter((l,i) =>l.id !==id)
-    localStorage.setItem("apt",JSON.stringify(dData));
+  const handledelete = (id) => {
+    let localData = JSON.parse(localStorage.getItem("apt"));
+    let dData = localData.filter((l, i) => l.id !== id)
+    localStorage.setItem("apt", JSON.stringify(dData));
     loadData();
- }
- const handleadit =(id)=>{
-  hisoty.push("/bookappointment", {"id":id});
-    
- }
+  }
+  const handleadit = (id) => {
+    hisoty.push("/bookappointment", { "id": id });
+
+  }
 
   useEffect(() => {
     loadData();
@@ -53,11 +53,11 @@ function ListAppointment(props) {
         data.map((d, i) => {
           return (
             <>
-             
+
               <h1>{d.name}</h1>
               <h1>{d.email}</h1>
-              <button onClick={() =>handledelete(d.id)}>delete</button>
-              <button onClick={() =>handleadit(d.id)}>Edit</button>
+              <button onClick={() => handledelete(d.id)}>delete</button>
+              <button onClick={() => handleadit(d.id)}>Edit</button>
               {/* <h1>{d.phone}</h1>
               <h1>{d.date}</h1>
               <h1>{d.department}</h1>

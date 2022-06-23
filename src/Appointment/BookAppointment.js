@@ -37,10 +37,10 @@ function BookAppointment(props) {
     department: yup.string().required("enter department"),
     message: yup.string().required("enter message")
   };
-  const handleUpdateData = () => {
+  const handleUpdateData = (values) => {
     let localData = JSON.parse(localStorage.getItem("apt"));
     let uData = localData.map((l) => {
-      if (l.id !== values.id) {
+      if (l.id === values.id) {
         return values
       }
       else {
@@ -48,9 +48,10 @@ function BookAppointment(props) {
       }
     })
     localStorage.setItem("apt", JSON.stringify(uData));
-    hisoty.push("/listappointment")
+    
     setUpadate(false);
     formik.resetForm();
+    hisoty.push("/listappointment")
   }
 
   let schema = yup.object().shape(bookAppointment);
@@ -81,11 +82,12 @@ function BookAppointment(props) {
 
   useEffect(() => {
     let localData = JSON.parse(localStorage.getItem("apt"));
-    console.log(localData);
+    // console.log(localData);
     if (localData !== null && props.location.state) {
-
+      
       let fData = localData.filter((l) => l.id === props.location.state.id);
       formik.setValues(fData[0]);
+      setUpadate(true);
     }
 
 

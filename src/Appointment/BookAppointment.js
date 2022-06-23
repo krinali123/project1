@@ -48,7 +48,7 @@ function BookAppointment(props) {
       }
     })
     localStorage.setItem("apt", JSON.stringify(uData));
-    
+
     setUpadate(false);
     formik.resetForm();
     hisoty.push("/listappointment")
@@ -84,7 +84,7 @@ function BookAppointment(props) {
     let localData = JSON.parse(localStorage.getItem("apt"));
     // console.log(localData);
     if (localData !== null && props.location.state) {
-      
+
       let fData = localData.filter((l) => l.id === props.location.state.id);
       formik.setValues(fData[0]);
       setUpadate(true);
@@ -190,7 +190,7 @@ function BookAppointment(props) {
             <div className="form-group mt-3">
               <Inputbox type="textarea"
                 className="form-control"
-                value={values.textarea}
+                value={values.message}
                 name="message" rows={5}
                 placeholder="Message (Optional)"
                 error={Boolean(errors.message) && touched.message}

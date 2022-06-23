@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 function ListAppointment(props) {
   const hisoty = useHistory();
@@ -9,9 +15,9 @@ function ListAppointment(props) {
   const loadData = () => {
 
     let localData = JSON.parse(localStorage.getItem("apt"));
-    
-      setData(localData);
-    
+
+    setData(localData);
+
   }
   const handledelete = (id) => {
     let localData = JSON.parse(localStorage.getItem("apt"));
@@ -49,7 +55,37 @@ function ListAppointment(props) {
         </div>
       </div>
 
-      {
+
+      <Card sx={{ maxWidth: 550 }}>
+
+        <CardContent>
+          <Typography>
+            <h2>ListAppointment</h2>
+          </Typography>
+          {
+            data.map((d, i) => {
+              return (
+                <>
+                  <Typography gutterBottom variant="h5">
+                    <h1>{d.name}</h1>
+                    <h1>{d.email}</h1>
+                    <button onClick={() => handledelete(d.id)}>delete</button>
+
+                    <button onClick={() => handleadit(d.id)}>Edit</button>
+                  </Typography>
+
+
+                </>
+              )
+            })
+          }
+        </CardContent>
+        <CardActions>
+
+        </CardActions>
+      </Card>
+
+      {/* {
         data.map((d, i) => {
           return (
             <>
@@ -58,14 +94,11 @@ function ListAppointment(props) {
               <h1>{d.email}</h1>
               <button onClick={() => handledelete(d.id)}>delete</button>
               <button onClick={() => handleadit(d.id)}>Edit</button>
-              {/* <h1>{d.phone}</h1>
-              <h1>{d.date}</h1>
-              <h1>{d.department}</h1>
-              <h1>{d.message}</h1> */}
+             
             </>
           )
         })
-      }
+      } */}
     </section>
 
   );
